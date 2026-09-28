@@ -72,6 +72,8 @@ flowchart TD
     BROKER --> TOPIC
 ```
 
+For physical installation photographs, component pinouts, and circuit schematics, see [Hardware Documentation](hardware.md).
+
 ---
 
 ## Ground reference configuration

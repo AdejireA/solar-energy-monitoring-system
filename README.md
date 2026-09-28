@@ -4,6 +4,12 @@ An ESP32-based IoT telemetry and sensing prototype designed for an off-grid sola
 
 > **System Scope and Disclaimers:** This project is strictly an observational sensing, telemetry, and monitoring tool. It is **not** a Battery Management System (BMS), battery protection circuit, MPPT charge controller, inverter controller, autonomous energy-management system, or certified utility-grade energy meter. It does not perform active battery cell balancing, overcurrent cut-off, or autonomous load switching.
 
+<p align="center">
+  <img src="assets/hardware/installed-system.jpg" width="650" alt="Physical installation of the monitoring prototype alongside the off-grid solar system">
+  <br>
+  <em>Physical installation of the monitoring prototype alongside the off-grid solar system.</em>
+</p>
+
 ---
 
 ## What It Monitors
@@ -95,6 +101,16 @@ The system is assembled from modular off-the-shelf components:
 | **1-Wire Pull-Up** | 1.5 kΩ resistor | Bus pull-up for 1-Wire communication on final build |
 | **Bias Network** | 2 × 10 kΩ resistors + 10 µF capacitor | 1.65 V DC midpoint bias network for unipolar ESP32 ADC |
 
+### Physical Implementation
+
+The sensing, measurement, and telemetry electronics were assembled around an ESP32 microcontroller on a prototyping perfboard implementation housed inside a wall-mounted weather-resistant enclosure adjacent to the solar inverter and DC shunts.
+
+<p align="center">
+  <img src="assets/hardware/monitoring-enclosure.jpg" width="550" alt="ESP32 controller and interface electronics assembled on prototyping perfboard inside the monitoring enclosure">
+  <br>
+  <em>ESP32 controller and sensor conditioning electronics on prototyping perfboard inside the monitoring enclosure.</em>
+</p>
+
 ### Final Microcontroller Pin Assignments
 
 | ESP32 Pin | Function / Connected Subsystem | Notes |
@@ -105,7 +121,19 @@ The system is assembled from modular off-the-shelf components:
 | **GPIO35** | ADC1 Input (SCT-013 Bias Circuit) | Input-only ADC1 pin; avoids Wi-Fi resource conflict on ADC2 |
 | **3.3V / GND** | Logic Power & DC System Ground | Power rail and source-side common ground reference |
 
-For full component specifications and wiring details, see [docs/hardware.md](docs/hardware.md).
+### Circuit Schematics
+
+The project's original circuit schematics were created in Fritzing during hardware development. The integrated sensor circuit schematic is shown below; individual subsystem schematics and comprehensive hardware documentation are available in [docs/hardware.md](docs/hardware.md).
+
+> **Development Schematic Note:** The integrated schematic below represents an intermediate development revision that visibly depicts an earlier 4.7 kΩ pull-up resistor on the DS18B20 temperature sensor (R7). In the final physical hardware build, this resistor was replaced with 1.5 kΩ to resolve long-wire communication instability. Where development schematics differ from the final implementation, the operational firmware and documented as-built configuration take precedence.
+
+<p align="center">
+  <img src="assets/schematics/complete-sensor-circuit.png" width="900" alt="Integrated sensor circuit schematic">
+  <br>
+  <em>Integrated sensor circuit schematic (development revision showing earlier 4.7 kΩ DS18B20 pull-up; final physical build standardizes on 1.5 kΩ).</em>
+</p>
+
+For individual subsystem schematics (battery INA226, solar INA226, SCT-013 AC conditioning, and the updated 1.5 kΩ DS18B20 interface), see [docs/hardware.md](docs/hardware.md#5-circuit-schematics).
 
 ---
 
@@ -201,11 +229,14 @@ solar-energy-monitoring-system/
 ├── LICENSE                             # MIT License
 ├── CITATION.cff                        # Machine-readable academic citation metadata
 ├── .gitignore                          # Git exclusion rules
+├── assets/                             # Hardware photographs and circuit schematics
+│   ├── hardware/                       # Installation and enclosure photographs
+│   └── schematics/                     # Original Fritzing circuit schematics
 ├── firmware/
 │   └── solar_ems_sensor_firmware.ino   # Sanitized ESP32 Arduino firmware
 ├── docs/
 │   ├── architecture.md                 # System topology, grounding, and data pipeline
-│   ├── hardware.md                     # Bill of materials, schematics, and pin mappings
+│   ├── hardware.md                     # Hardware implementation, BOM, and schematics
 │   ├── mqtt-payload.md                 # MQTT schema, data dictionary, and sign conventions
 │   ├── testing.md                      # Bench validation, soak test, and DS18B20 resolution
 │   └── troubleshooting.md              # Historical issues, diagnoses, and resolutions
