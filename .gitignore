@@ -1,0 +1,31 @@
+# Internal operational report (do not publish)
+RECONSTRUCTION_REPORT.md
+
+# Source drafting documents and un-sanitized source files
+*.docx
+Hardware_Chapter_Draft*.docx
+Final_Solar_EMS_sensor_firmware.ino
+
+# Arduino / PlatformIO build artifacts
+build/
+*.hex
+*.bin
+*.elf
+
+# Editor and OS clutter
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local logs and temporary files
+*.log
+*.tmp
+tmp/
+output/
+
+# Python caches
+__pycache__/
+*.py[cod]

@@ -1,0 +1,22 @@
+{
+  "device_id": "solar_ems_001",
+  "timestamp": "2026-08-26T07:56:09Z",
+  "solar": {
+    "voltage_v": 22.36,
+    "current_a": 5.322,
+    "power_w": 119.05,
+    "shunt_mv": 7.995
+  },
+  "battery": {
+    "voltage_v": 13.40125,
+    "current_a": -8.946,
+    "power_w": 119.85,
+    "shunt_mv": -12.3475,
+    "charging": false
+  },
+  "load": {
+    "current_a": 0.761626
+  },
+  "temperature_c": -127.0,
+  "interval_s": 300
+}
