@@ -20,11 +20,11 @@ This document details hardware and firmware engineering challenges encountered d
   $$V_{shunt} = V_{IN+} - V_{IN-}$$
   The Kelvin sense leads from the shunt were physically inverted relative to the INA226 terminal headers.
 - **Change Made:** The two Kelvin sense wires were physically transposed at the shunt's small sense screw terminals. 
-- **Final Status:** **Resolved on bench; noted in production.** While the bench configuration was corrected physically, the final firmware enforces a programmatic rule:
+- **Final Status:** **Resolved during bench testing; documented for the installed prototype.** While the bench configuration was corrected physically, the final firmware enforces a programmatic rule:
   ```cpp
   bool charging = (batteryCurrent > 0.05);
   ```
-  In production documentation, current sign is documented strictly according to the firmware rule rather than an inferred electrochemical convention.
+  In the final project documentation, current sign is documented strictly according to the firmware rule rather than an inferred electrochemical convention.
 
 ---
 
